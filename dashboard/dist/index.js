@@ -80,10 +80,11 @@
     const n = al.length;
     const m = bl.length;
     if (n + m > 4000) return [{ kind: "same", text: "(diff too large)" }];
-    // Compare with trailing whitespace stripped so spurious trailing-space
-    // differences don't fragment the diff into noise. Rendering still uses
-    // the original line text, so any real visible change is preserved.
-    const eq = (x, y) => x.replace(/\s+$/, "") === y.replace(/\s+$/, "");
+    // Compare lines with leading + trailing whitespace stripped so spurious
+    // indent/trailing-space differences don't fragment the diff into noise.
+    // Rendering uses the original line text, so any real visible change is
+    // still preserved.
+    const eq = (x, y) => x.trim() === y.trim();
     const dp = Array.from({ length: n + 1 }, () => new Array(m + 1).fill(0));
     for (let i = 1; i <= n; i++) {
       for (let j = 1; j <= m; j++) {
