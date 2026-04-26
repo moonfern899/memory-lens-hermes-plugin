@@ -1,0 +1,410 @@
+/* Memory Lens — plugin styles. References dashboard CSS vars so it
+   reskins automatically with the active theme. */
+
+.memlens-root {
+  padding: 0.25rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  color: var(--color-foreground);
+}
+
+/* dashboard shell leaks `uppercase` via text-transform inheritance; nuke and re-enable selectively */
+.memlens-root,
+.memlens-root * {
+  text-transform: none !important;
+}
+.memlens-root .memlens-tl-reason {
+  text-transform: uppercase !important;
+}
+
+.memlens-file-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-card-foreground, var(--color-foreground));
+}
+
+.memlens-tabs {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.memlens-tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--color-muted-foreground);
+  font-family: inherit;
+  margin-bottom: -1px;
+}
+.memlens-tab:hover {
+  color: var(--color-foreground);
+}
+.memlens-tab--active {
+  color: var(--color-foreground);
+  border-bottom-color: var(--color-primary);
+}
+
+.memlens-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.memlens-input {
+  background: var(--color-input, transparent);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius, 6px);
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  width: 100%;
+  font-family: inherit;
+}
+.memlens-input:focus {
+  outline: 2px solid var(--color-ring, var(--color-primary));
+  outline-offset: 1px;
+}
+
+.memlens-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+.memlens-h1 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  color: var(--color-foreground, currentColor);
+}
+.memlens-sub {
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+  margin: 0;
+}
+
+.memlens-gauges {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.memlens-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-muted, rgba(127, 127, 127, 0.15));
+  overflow: hidden;
+}
+.memlens-bar-fill {
+  height: 100%;
+  transition: width 240ms ease-out, background 240ms;
+}
+
+.memlens-search {
+  max-width: 480px;
+}
+
+.memlens-empty {
+  font-size: 0.85rem;
+  color: var(--color-muted-foreground);
+  padding: 1rem 0;
+  font-style: italic;
+}
+
+.memlens-entry {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius, 6px);
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+  background: color-mix(in srgb, var(--color-card) 92%, transparent);
+}
+.memlens-entry-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.memlens-entry-chars {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+}
+.memlens-entry-mini {
+  flex: 0 0 80px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-muted, rgba(127, 127, 127, 0.15));
+  overflow: hidden;
+  max-width: 240px;
+}
+.memlens-entry-mini-fill {
+  height: 100%;
+}
+.memlens-entry-confirm {
+  padding: 0.75rem 0.85rem;
+  border-radius: var(--radius, 6px);
+  background: color-mix(in srgb, var(--color-destructive, #c44) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-destructive, #c44) 35%, transparent);
+}
+.memlens-entry-confirm-msg {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+.memlens-entry-confirm-sub {
+  font-size: 0.78rem;
+  color: var(--color-muted-foreground);
+  margin-top: 0.25rem;
+}
+.memlens-entry-body {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  color: var(--color-card-foreground, var(--color-foreground));
+  line-height: 1.5;
+}
+.memlens-entry-body--collapsed {
+  max-height: calc(1.4em * 4);
+  overflow: hidden;
+}
+
+.memlens-link {
+  background: transparent;
+  border: 0;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  margin-top: 0.25rem;
+}
+.memlens-link:hover {
+  text-decoration: underline;
+}
+
+.memlens-banner {
+  border-left: 3px solid var(--color-primary, #d9b66e);
+  background: color-mix(in srgb, var(--color-primary) 10%, transparent);
+  color: var(--color-foreground);
+  font-size: 0.82rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.45;
+}
+.memlens-banner--warn {
+  border-left-color: var(--color-warning, #d9b66e);
+  background: color-mix(in srgb, var(--color-warning, #d9b66e) 14%, transparent);
+}
+
+/* Inline mono span — used for paths/filenames where <code> would pick
+   up the global chip styling from the dashboard's prose CSS. */
+.memlens-mono {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-size: 0.95em;
+}
+
+/* Textarea + select tuned to match the dashboard's native input look —
+   same border, radius, padding, focus ring as shadcn <Input>. */
+.memlens-select,
+.memlens-textarea {
+  background: var(--color-background, transparent);
+  color: var(--color-foreground);
+  border: 1px solid var(--color-input, var(--color-border));
+  border-radius: var(--radius, 6px);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 120ms, box-shadow 120ms;
+}
+.memlens-textarea {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  resize: vertical;
+  min-height: 110px;
+}
+.memlens-textarea::placeholder,
+.memlens-select::placeholder {
+  color: var(--color-muted-foreground);
+}
+.memlens-textarea:focus-visible,
+.memlens-select:focus-visible {
+  outline: none;
+  border-color: var(--color-ring, var(--color-primary));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-ring, var(--color-primary)) 25%, transparent);
+}
+
+.memlens-msg {
+  font-size: 0.82rem;
+  padding: 0.5rem 0.65rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--color-success, #6b8a72) 14%, transparent);
+  color: var(--color-foreground);
+  border: 1px solid color-mix(in srgb, var(--color-success, #6b8a72) 30%, transparent);
+}
+.memlens-msg--warn {
+  background: color-mix(in srgb, var(--color-warning, #d9b66e) 18%, transparent);
+  border-color: color-mix(in srgb, var(--color-warning, #d9b66e) 40%, transparent);
+}
+.memlens-msg--err {
+  background: color-mix(in srgb, var(--color-destructive, #c46550) 14%, transparent);
+  border-color: color-mix(in srgb, var(--color-destructive, #c46550) 40%, transparent);
+}
+
+.memlens-legend {
+  font-size: 0.78rem;
+  color: var(--color-muted-foreground);
+  background: color-mix(in srgb, var(--color-muted) 50%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius, 6px);
+  padding: 0.55rem 0.75rem;
+  line-height: 1.55;
+}
+.memlens-legend strong {
+  color: var(--color-foreground);
+  font-weight: 600;
+}
+
+.memlens-timeline {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+.memlens-tl-item {
+  position: relative;
+  min-width: 130px;
+  background: color-mix(in srgb, var(--color-card) 90%, transparent);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius, 6px);
+  color: var(--color-foreground);
+  font-family: inherit;
+}
+.memlens-tl-item:hover {
+  border-color: var(--color-primary);
+}
+.memlens-tl-item--active {
+  background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+  border-color: var(--color-primary);
+}
+.memlens-tl-pick {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0.45rem 0.6rem 0.65rem;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+}
+.memlens-tl-delete {
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  color: var(--color-muted-foreground);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms, color 120ms, background 120ms;
+}
+.memlens-tl-item:hover .memlens-tl-delete,
+.memlens-tl-delete:focus-visible {
+  opacity: 1;
+}
+.memlens-tl-delete:hover {
+  color: var(--color-destructive, #c46550);
+  background: color-mix(in srgb, var(--color-destructive, #c46550) 14%, transparent);
+}
+.memlens-tl-when {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+.memlens-tl-reason {
+  font-size: 0.7rem;
+  color: var(--color-muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.15rem;
+}
+.memlens-tl-counts {
+  font-size: 0.72rem;
+  color: var(--color-muted-foreground);
+  margin-top: 0.2rem;
+}
+
+.memlens-diff {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  margin: 0;
+  line-height: 1.5;
+}
+.memlens-diff-line {
+  padding: 0 0.25rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.memlens-diff-line--add {
+  background: color-mix(in srgb, var(--color-success, #6b8a72) 14%, transparent);
+  color: var(--color-foreground);
+}
+.memlens-diff-line--del {
+  background: color-mix(in srgb, var(--color-destructive, #c46550) 14%, transparent);
+  color: var(--color-foreground);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+  opacity: 0.85;
+}
+.memlens-diff-mark {
+  width: 1ch;
+  flex-shrink: 0;
+  color: var(--color-muted-foreground);
+}
+.memlens-diff-wrap {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.memlens-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-muted-foreground);
+  font-size: 0.9rem;
+}
+.memlens-err {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  background: color-mix(in srgb, var(--color-destructive, #c46550) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-destructive, #c46550) 40%, transparent);
+  border-radius: 4px;
+  padding: 0.6rem;
+}
+
+.memlens-footnote {
+  font-size: 0.72rem;
+  color: var(--color-muted-foreground);
+  text-align: center;
+  margin-top: 1.5rem;
+}

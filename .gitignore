@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+
+# Plugin runtime data — these get created at runtime under
+# ~/.hermes/plugins/memory-lens/data/, but if anyone runs from a checkout
+# we don't want snapshots/locks committed.
+data/
+*.lock
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local node modules in case anyone adds tooling
+node_modules/

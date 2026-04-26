@@ -1,0 +1,14 @@
+{
+  "name": "memory-lens",
+  "label": "Memory Lens",
+  "description": "Inspect, search, and snapshot Hermes' memory files. Surfaces char-limit pressure, entry-level breakdowns, and a timeline of changes — fixes the 'memory is a black box' gap.",
+  "icon": "Eye",
+  "version": "0.1.0",
+  "tab": {
+    "path": "/memory-lens",
+    "position": "after:skills"
+  },
+  "entry": "dist/index.js",
+  "css": "dist/style.css",
+  "api": "plugin_api.py"
+}
