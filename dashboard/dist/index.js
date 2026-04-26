@@ -15,7 +15,7 @@
     return;
   }
   const { React } = SDK;
-  const { useState, useEffect, useMemo, useCallback } = SDK.hooks;
+  const { useState, useEffect, useMemo, useCallback, useRef } = SDK.hooks;
   const { Card, CardHeader, CardTitle, CardContent, Badge, Button } =
     SDK.components;
   const cn = (SDK.utils && SDK.utils.cn) || ((...a) => a.filter(Boolean).join(" "));
@@ -595,6 +595,28 @@
       setMsg(null);
     };
 
+    const textareaRef = useRef(null);
+    const insertSeparator = () => {
+      const ta = textareaRef.current;
+      const start = ta ? ta.selectionStart : content.length;
+      const end = ta ? ta.selectionEnd : content.length;
+      const before = content.slice(0, start);
+      const after = content.slice(end);
+      // Make sure the § sits on its own line — that's what the parser
+      // requires (\n§\n). Prepend/append newlines only if missing.
+      const lead = before.length === 0 || before.endsWith("\n") ? "" : "\n";
+      const trail = after.length === 0 || after.startsWith("\n") ? "" : "\n";
+      const insert = lead + "§" + trail;
+      const next = before + insert + after;
+      setContent(next);
+      setTimeout(() => {
+        if (!ta) return;
+        ta.focus();
+        const pos = before.length + insert.length;
+        ta.setSelectionRange(pos, pos);
+      }, 0);
+    };
+
     return h(
       Card,
       null,
@@ -648,10 +670,11 @@
           ),
         ),
         h("textarea", {
+          ref: textareaRef,
           className: "memlens-textarea",
           rows: 16,
           placeholder:
-            "(file is empty — type entries here, separated by a line containing a single § character)",
+            "(file is empty — type entries here, use Insert separator between them)",
           value: content,
           onChange: (e) => setContent(e.target.value),
           style: { marginTop: "0.5rem", minHeight: "300px" },
@@ -682,6 +705,11 @@
           h(
             "div",
             { style: { display: "flex", gap: "0.5rem" } },
+            h(
+              Button,
+              { variant: "outline", onClick: insertSeparator, disabled: busy },
+              "Insert separator",
+            ),
             h(
               Button,
               { variant: "outline", onClick: revert, disabled: busy || !dirty },
